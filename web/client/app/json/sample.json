@@ -1,0 +1,18 @@
+{
+    "name": "Homer",
+    "notes": [
+        {"text": "Buy beer", "tags": [3, 1], "done": true},
+        {"text": "Take Jessie for a walk", "tags": [2]},
+        {"text": "Build a pig run", "tags": [1, 2]}
+    ],
+    "tags": [
+        {"id": 1, "name": "Next"},
+        {"id": 2, "name": "Irwin"},
+        {"id": 3, "name": "Groceries"},
+        {"id": 4, "name": "Shopping"},
+        {"id": 5, "name": "Projects"},
+        {"id": 6, "name": "Timberwood"},
+        {"id": 7, "name": "Office"}
+
+    ]
+}

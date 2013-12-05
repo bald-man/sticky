@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4>Edit Tags</h4>
+</div>
+<div class="modal-body">
+  <input type="text" placeholder="Search tags..." ng-model="tagFilter" g-focus="true">
+  <table class="table" style="max-height: 400px; overflow-y: scroll">
+    <tr ng-repeat="tag in user.tags | filter: tagFilter | orderBy: 'tag.name'">
+      <td>
+        <input type="text" ng-model="tag.name" placeholder="Tag name..." class="naked">
+      </td>
+      <td>{{getNoteReferences(tag)}}</td>
+      <td>
+        <button class="btn btn-mini btn-link" ng-click="deleteTag(tag)"><i class="icon-trash"></i></button>
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn" ng-click="hideTagDialog()">Close</button>
+</div>

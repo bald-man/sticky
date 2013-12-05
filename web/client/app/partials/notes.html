@@ -1,0 +1,121 @@
+<div>
+<header class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">Sticky</a>
+
+      <ng-include src="'partials/omnibox.html'"></ng-include>
+
+      <div class="btn-group pull-right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          {{loggedInUser.email}}
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" ng-click="logOut()">Log out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- todo: show a hint to press Shift + Enter to create a new note if the filtered list is empty. -->
+<!-- todo: consider displaying a grayed out list of notes if the filter is empty to avoid the jarring effect. -->
+<div style="margin-bottom: 90px"></div>
+
+<div class="container" >
+  <div ng-repeat="note in getDisplayedNotes()">
+    <!-- Contracted view -->
+    <div class="note-container note-hover"
+         ng-hide="isExpanded(note)"
+         ng-class="note == selected ? 'note-selected' : ''">
+      <div class="note-checkbox">
+        <input type="checkbox" class="note-checkbox" ng-model="note.done">
+      </div>
+      <div class="note-contents" ng-class="filtered.notes.indexOf(note) < 0 ? 'note-filtered-out' : ''" ng-click="toggleExpanded(note)">
+        <!--<button style="background: transparent none; border: none; text-align: left; padding: 5px" class="btn note">-->
+        {{note.text}}
+        <!--</button>-->
+        <ul class="inline note-tags">
+          <li ng-repeat="tag in note.tags | orderBy: 'name'">
+            <span class="label label-info">{{tag.name}}</span>
+          </li>
+        </ul>
+        </button>
+      </div>
+      <div style="display: inline-block; ">
+        <button class="btn note note-delete" ng-click="deleteNote(note)">&times;</button>
+      </div>
+    </div>
+
+    <!-- Expanded view -->
+    <div style="min-height: 150px; max-height: 400px" class="note-container" ng-show="isExpanded(note)">
+      <div style="margin-top: 5px" class="btn-group">
+        <button class="btn btn-mini" ng-click="deleteNote(note)"><i class="icon-trash"></i> Delete</button>
+        <button class="btn btn-mini" ng-click="showTagsDialog()"><i class="icon-pencil"></i> Edit Tags</button>
+        <button class="btn btn-mini" ng-click="toggleExpanded(note)"><i class=" icon-resize-small"></i> Minimize</button>
+      </div>
+      <div style="margin-bottom: 10px"></div>
+      <div class="note-checkbox">
+        <input type="checkbox" class="note-checkbox" ng-model="note.done">
+      </div>
+      <div style="display: inline-block; height: 120px; width: 450px;">
+        <textarea ng-model="note.text" type="text" class="input-block-level" style="height: 100%; max-width: 450px"></textarea>
+      </div>
+      <div style="display: inline-block; height: 100%; width: 450px; margin-left: 5px; vertical-align: top">
+        <ng-include src="'partials/tag-selector.html'"></ng-include>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--<div ng-show="tagSelectorVisible" class="modal fade in" style="top: 100px; width: 300px; position: absolute">-->
+  <!--&lt;!&ndash;<div class="modal-header"></div>&ndash;&gt;-->
+
+  <!--<div class="modal-body">-->
+    <!--<div style="margin-bottom: 10px">-->
+      <!--<input type="text" class="search-query" ng-model="tagFilter" placeholder="Search tags..."-->
+             <!--focus-me="tagSelectorVisible">-->
+    <!--</div>-->
+
+    <!--<div style="height:150px; overflow-y: scroll;">-->
+      <!--<table>-->
+        <!--<tr ng-repeat="selectedTag in selectedTags | filter: tagFilter | orderBy: selectedTagSort">-->
+          <!--<td>-->
+            <!--<label class="checkbox" ng-hide="editedTag === selectedTag">-->
+              <!--<input type="checkbox" ng-model="selectedTag.selected">{{selectedTag.tag.name}}-->
+            <!--</label>-->
+            <!--<input type="text" ng-model="selectedTag.tag.name" ng-show="editedTag === selectedTag">-->
+          <!--</td>-->
+          <!--<td>-->
+            <!--<button class="btn btn-link btn-mini" ng-click="editTag(selectedTag)" ng-hide="editedTag === selectedTag">-->
+              <!--Edit-->
+            <!--</button>-->
+          <!--</td>-->
+        <!--</tr>-->
+      <!--</table>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash;div style="height:150px; overflow-y: scroll;">-->
+      <!--<div ng-repeat="selectedTag in selectedTags | filter: tagFilter | orderBy: selectedTagSort">-->
+        <!--<label class="checkbox">-->
+          <!--<input type="checkbox" ng-model="selectedTag.selected">{{selectedTag.tag.name}}-->
+        <!--</label>-->
+        <!--<button class="btn btn-link btn-mini">Edit</button>-->
+      <!--</div>-->
+    <!--</div&ndash;&gt;-->
+    <!--<div>-->
+      <!--<input type="text" ng-model="newTag" ng-keypress="addTag($event)" placeholder="New tag...">-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="modal-footer">-->
+    <!--<button class="btn btn-primary" ng-click="applyTagSelector()">Apply</button>-->
+    <!--<button class="btn" ng-click="cancelTagSelector()">Cancel</button>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+</div>

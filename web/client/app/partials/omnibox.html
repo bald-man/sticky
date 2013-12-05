@@ -1,0 +1,14 @@
+<form class="navbar-search" ng-controller="OmniboxCtrl">
+  <div style="height: 30px">
+    <textarea ng-model="omni.input"
+           ui-keydown="{esc: 'clearOmni()', 'ctrl-enter': 'createNote()', 'meta-enter': 'createNote()'}"
+           g-focus="!document.activeElement"
+           msd-elastic
+           rows="1"
+           class="input-xxlarge"
+           style="overflow: visible; height: auto"
+           placeholder="Search or create notes."></textarea>
+
+    <!--<button class="btn btn-primary" ng-click="createNote()">Add Note</button>-->
+  </div>
+</form>

@@ -1,0 +1,28 @@
+<div ng-controller="TagSelectorCtrl">
+  <div class="input-append">
+    <input type="text"
+           placeholder="Search tags..."
+           ng-model="search.text"
+           ui-keyup="{esc: 'clearSearch()', 'ctrl-enter': 'createTag()', 'meta-enter': 'createTag', enter: 'toggleIfSingle()'}"
+           class="input-block-level">
+    <button class="btn" ng-click="createTag()" tooltip="[Ctrl+Enter]" tooltip-placement="right">Add Tag</button>
+  </div>
+  <div style="overflow-y: scroll; max-height: 100px; height: 100px">
+    <ul class="inline">
+      <li>
+        <button class="btn btn-mini btn-link"
+                ng-click="showTagsDialog()"><i class="icon-pencil"></i> Edit Tags...
+        </button>
+      </li>
+      <!-- todo: replace the filter with a reference to the filtered data model to avoid filtering twice. -->
+      <li ng-repeat="tag in getDisplayedTags()" style="margin-bottom: 4px;">
+        <button class="btn btn-mini"
+                ng-class="isTagSelected(tag) ? 'btn-info' : ''"
+                ng-click="toggleSelection(tag)">
+          {{tag.name}}
+        </button>
+      </li>
+
+    </ul>
+  </div>
+</div>
